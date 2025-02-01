@@ -46,6 +46,8 @@ keyboard.hook(on_key_event)
 
 # call
 def handle_action(action: str, dx, dy):
+    if action not in presetDict[curPreset]:
+       return
     elements = presetDict[curPreset][action]
     key1, key2, key3 = elements[0], elements[1], elements[2]
     hold = elements[3]
