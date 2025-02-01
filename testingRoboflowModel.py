@@ -1,9 +1,11 @@
 from inference.models.utils import get_roboflow_model
 import cv2
 
+
+
 # Roboflow model
-model_name = "face-detection-mik1i"
-model_version = "18"
+model_name = "rock-paper-scissors-sxsw"
+model_version = "14"
 
 # Open the default camera (usually the built-in webcam)
 cap = cv2.VideoCapture(0)
@@ -20,6 +22,11 @@ model = get_roboflow_model(
     api_key="T9dyaU5pnxSWychmChZi"
 )
 
+test_dict = {}
+test_dict["Rock"] = 1
+test_dict["Paper"] = 2
+test_dict["Scissors"] = 3
+buffer = ""
 while True:
     # Capture frame-by-frame
     ret, frame = cap.read()
@@ -28,7 +35,7 @@ while True:
     if ret:
         # Run inference on the frame
         results = model.infer(image=frame,
-                              confidence=0.5,
+                              confidence=0.66,
                               iou_threshold=0.5)
 
         # Plot image with face bounding box (using opencv)
@@ -40,15 +47,15 @@ while True:
             y_center = int(prediction.y)
             width = int(prediction.width)
             height = int(prediction.height)
+            hold = str(prediction.class_name)
 
-            # Calculate top-left and bottom-right corners from center, width, and height
-            x0 = x_center - width // 2
-            y0 = y_center - height // 2
-            x1 = x_center + width // 2
-            y1 = y_center + height // 2
 
-            cv2.rectangle(frame, (x0, y0), (x1, y1), (255, 255, 0), 10)
-            cv2.putText(frame, "Face", (x0, y0 - 10), cv2.FONT_HERSHEY_SIMPLEX, 1.5, (255, 255, 255), 2)
+            if buffer != hold:
+                print(hold)
+            buffer = hold
+        else:
+            buffer = ""
+
 
         # Display the resulting frame
         cv2.imshow('Webcam Feed', frame)
