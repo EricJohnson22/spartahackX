@@ -5,12 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9b3b230f-799c-4dff-9b4b-b281363c648f" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/plan.txt" beforeDir="false" afterPath="$PROJECT_DIR$/plan.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/testingKeyboard.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -55,7 +62,7 @@
       <option name="presentableId" value="Default" />
       <updated>1738418331501</updated>
       <workItem from="1738418337447" duration="144000" />
-      <workItem from="1738418518864" duration="652000" />
+      <workItem from="1738418518864" duration="1116000" />
     </task>
     <servers />
   </component>
