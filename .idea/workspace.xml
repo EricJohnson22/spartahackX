@@ -6,40 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="9b3b230f-799c-4dff-9b4b-b281363c648f" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/keyboard-master/keyboard-master/.coveragerc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/keyboard-master/keyboard-master/.gitattributes" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/keyboard-master/keyboard-master/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/keyboard-master/keyboard-master/CHANGES.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/keyboard-master/keyboard-master/LICENSE.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/keyboard-master/keyboard-master/MANIFEST.in" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/keyboard-master/keyboard-master/Makefile" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/keyboard-master/keyboard-master/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/keyboard-master/keyboard-master/examples/10_second_macro.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/keyboard-master/keyboard-master/examples/customizable_hotkey.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/keyboard-master/keyboard-master/examples/pressed_keys.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/keyboard-master/keyboard-master/examples/push_to_talk_ubuntu.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/keyboard-master/keyboard-master/examples/segmented_macro.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/keyboard-master/keyboard-master/examples/simulate_held_down.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/keyboard-master/keyboard-master/examples/stdin_stdout_events.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/keyboard-master/keyboard-master/examples/write.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/keyboard-master/keyboard-master/keyboard/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/keyboard-master/keyboard-master/keyboard/__main__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/keyboard-master/keyboard-master/keyboard/_canonical_names.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/keyboard-master/keyboard-master/keyboard/_darwinkeyboard.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/keyboard-master/keyboard-master/keyboard/_darwinmouse.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/keyboard-master/keyboard-master/keyboard/_generic.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/keyboard-master/keyboard-master/keyboard/_keyboard_event.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/keyboard-master/keyboard-master/keyboard/_keyboard_tests.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/keyboard-master/keyboard-master/keyboard/_mouse_event.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/keyboard-master/keyboard-master/keyboard/_mouse_tests.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/keyboard-master/keyboard-master/keyboard/_nixcommon.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/keyboard-master/keyboard-master/keyboard/_nixkeyboard.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/keyboard-master/keyboard-master/keyboard/_nixmouse.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/keyboard-master/keyboard-master/keyboard/_winkeyboard.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/keyboard-master/keyboard-master/keyboard/_winmouse.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/keyboard-master/keyboard-master/keyboard/mouse.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/keyboard-master/keyboard-master/make_release.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/keyboard-master/keyboard-master/setup.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/testingKeyboard.py" beforeDir="false" afterPath="$PROJECT_DIR$/testingKeyboard.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -81,6 +47,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Python.testingKeyboard.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
@@ -109,11 +76,14 @@
       <option name="presentableId" value="Default" />
       <updated>1738418331501</updated>
       <workItem from="1738418337447" duration="144000" />
-      <workItem from="1738418518864" duration="1817000" />
+      <workItem from="1738418518864" duration="2363000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/spartahackX$testingKeyboard.coverage" NAME="testingKeyboard Coverage Results" MODIFIED="1738420678713" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
