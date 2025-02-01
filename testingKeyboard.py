@@ -44,8 +44,8 @@ def on_key_event(e):
 keyboard.hook(on_key_event)
 
 
-# call 
-def handle_action(action: str):
+# call
+def handle_action(action: str, x, y):
     elements = presetDict[curPreset][action]
     key1, key2, key3 = elements[0], elements[1], elements[2]
     hold = elements[3]
@@ -58,7 +58,7 @@ def handle_action(action: str):
 
     #if this action's delta should move the mouse
     if track_movement == 'true':
-        mouse.move(5, 5, absolute=False, duration=0.1)
+        mouse.move(50, 50, absolute=False, duration=0.1)
         return
 
 def simulate_mouse(btn: int, scroll: int = None):
@@ -128,7 +128,7 @@ def stop_simulated_hotkey_hold(key1: str = '', key2: str = '', key3: str = ''):
 
     print("stopped holding " + key1)
 
-handle_action('test')
+handle_action('test', 1010, 10 , 10)
 
 time.sleep(1)
 stop_simulated_hotkey_hold('ctrl', '', '')
