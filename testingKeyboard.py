@@ -1,9 +1,11 @@
+import time
+
 import keyboard
 import mouse
 import json
 
 curPreset = 'default'
-presetDict = {'default': {}}
+presetDict = {'default': {'test' : ['ctrl', '', '', 'true', 'true']}}
 
 cur_key_map = {}
 
@@ -42,11 +44,22 @@ def on_key_event(e):
 keyboard.hook(on_key_event)
 
 
+# call 
 def handle_action(action: str):
     elements = presetDict[curPreset][action]
-    if elements[3] == 'true':
-        simulate_hotkey_press(elements[0], elements[1], elements[2])
+    key1, key2, key3 = elements[0], elements[1], elements[2]
+    hold = elements[3]
+    track_movement = elements[4]
 
+    if hold == 'true':
+        simulate_hotkey_hold(key1, key2, key3)
+    else:
+        simulate_hotkey_press(key1, key2, key3)
+
+    #if this action's delta should move the mouse
+    if track_movement == 'true':
+        mouse.move(5, 5, absolute=False, duration=0.1)
+        return
 
 def simulate_mouse(btn: int, scroll: int = None):
     if btn == 0:
@@ -59,21 +72,21 @@ def simulate_mouse(btn: int, scroll: int = None):
         mouse.wheel(scroll)
 
 
-def simulate_hotkey_press(key1: str = None, key2: str = None, key3: str = None):
+def simulate_hotkey_press(key1: str = '', key2: str = '', key3: str = ''):
     # check if the third key is a mouse button
     hotkey = ''
-    if key1 is not None and key1 != '':
+    if key1 != '':
         hotkey += key1
 
-        if key2 is not None and key2 != '':
+        if key2 != '':
             hotkey += '+'
             hotkey += key2
-            if key3 is not None and key3 != '':
+            if key3 != '':
                 hotkey += '+'
                 hotkey += key3
-    elif key2 is not None and key2 != '':
+    elif key2 != '':
         hotkey += key2
-        if key3 is not None and key3 != '':
+        if key3 != '':
             hotkey += '+'
             hotkey += key3
 
@@ -87,7 +100,7 @@ def simulate_hotkey_press(key1: str = None, key2: str = None, key3: str = None):
             simulate_mouse(2)
         else:
             simulate_mouse(2, 1)
-    elif key3 is not None and key3 != '':
+    elif key3 != '':
         hotkey += key3
 
     if hotkey != '':
@@ -95,9 +108,30 @@ def simulate_hotkey_press(key1: str = None, key2: str = None, key3: str = None):
         #keyboard.send(hotkey)
     return hotkey
 
+def simulate_hotkey_hold(key1: str = '', key2: str = '', key3: str = ''):
+    if key1 != '':
+        keyboard.press(key1)
+    if key2 != '':
+        keyboard.press(key2)
+    if key3 != '':
+        keyboard.press(key3)
 
-print(simulate_hotkey_press('', '', 'a'))
+    print("holding " + key1)
 
+def stop_simulated_hotkey_hold(key1: str = '', key2: str = '', key3: str = ''):
+    if key1 != '':
+        keyboard.release(key1)
+    if key2 != '':
+        keyboard.release(key2)
+    if key3 != '':
+        keyboard.release(key3)
+
+    print("stopped holding " + key1)
+
+handle_action('test')
+
+time.sleep(1)
+stop_simulated_hotkey_hold('ctrl', '', '')
 
 
 
