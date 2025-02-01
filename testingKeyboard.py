@@ -3,9 +3,10 @@ import mouse
 import json
 
 curPreset = 'default'
-presetDict = {'default' : {}}
+presetDict = {'default': {}}
 
 cur_key_map = {}
+
 
 def create_preset(name: str, key_map: dict):
     presetDict[name] = key_map
@@ -20,7 +21,6 @@ def remove_preset(name: str):
     switch_preset('default')
 
 
-
 # switch the activated preset
 def switch_preset(name: str):
     curPreset = name
@@ -31,27 +31,21 @@ def bind_action(action: str, keys: list[str]):
     presetDict[curPreset][action] = keys
 
 
-
 def on_key_event(e):
     if e.name == 'm' and e.event_type == 'down':  # Press 'm' to move the mouse
         mouse.move(50, 50, absolute=False, duration=0.1)
         # mouse.click('left')  # Perform a left-click
         print("Mouse moved and clicked!")
 
+
 # Hook the key event
 keyboard.hook(on_key_event)
 
 
-def simulate_hotkey(key1: str = None, key2: str = None, key3: str = None):
-    if key1 is None:
-        print("Not a valid key input!")
-        return
-    if key2 is None:
-        keyboard.send(key1)
-    elif key3 is None:
-        keyboard.send(key1 + '+' + key2)
-    else:
-        keyboard.send(key1 + '+' + key2 + '+' + key3)
+def handle_action(action: str):
+    elements = presetDict[curPreset][action]
+    if elements[3] == 'true':
+        simulate_hotkey_press(elements[0], elements[1], elements[2])
 
 
 def simulate_mouse(btn: int, scroll: int = None):
@@ -64,8 +58,51 @@ def simulate_mouse(btn: int, scroll: int = None):
     elif btn == 2 and scroll is not None:
         mouse.wheel(scroll)
 
+
+def simulate_hotkey_press(key1: str = None, key2: str = None, key3: str = None):
+    # check if the third key is a mouse button
+    hotkey = ''
+    if key1 is not None and key1 != '':
+        hotkey += key1
+
+        if key2 is not None and key2 != '':
+            hotkey += '+'
+            hotkey += key2
+            if key3 is not None and key3 != '':
+                hotkey += '+'
+                hotkey += key3
+    elif key2 is not None and key2 != '':
+        hotkey += key2
+        if key3 is not None and key3 != '':
+            hotkey += '+'
+            hotkey += key3
+
+
+    if key3 == 'left' or key3 == 'right' or key3 == 'middle' or key3 == 'scroll':
+        if key3 == 'left':
+            simulate_mouse(0)
+        elif key3 == 'right':
+            simulate_mouse(1)
+        elif key3 == 'middle':
+            simulate_mouse(2)
+        else:
+            simulate_mouse(2, 1)
+    elif key3 is not None and key3 != '':
+        hotkey += key3
+
+    if hotkey != '':
+        return hotkey
+        #keyboard.send(hotkey)
+    return hotkey
+
+
+print(simulate_hotkey_press('', '', 'a'))
+
+
+
+
 def record_hotkey():
-    return# hotkeys = []
+    return  # hotkeys = []
     # key1 = ''
     # while key1 == '':
     #     key1 = keyboard.read_event()
