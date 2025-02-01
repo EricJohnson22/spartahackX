@@ -1,5 +1,11 @@
 import keyboard
 import mouse
+import roboflow
+
+rf = roboflow.Roboflow("T9dyaU5pnxSWychmChZi")
+
+# List all projects for your workspace
+workspace = rf.workspace()
 
 def on_key_event(e):
     if e.name == 'm' and e.event_type == 'down':  # Press 'm' to move the mouse
