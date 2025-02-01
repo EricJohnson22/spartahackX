@@ -130,7 +130,6 @@ def stop_simulated_hotkey_hold(key1: str = '', key2: str = '', key3: str = ''):
 
     print("stopped holding " + key1)
 
-handle_action('test', 1010, 10 , 10)
 
 time.sleep(1)
 stop_simulated_hotkey_hold('ctrl', '', '')
