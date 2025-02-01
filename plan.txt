@@ -9,6 +9,7 @@ Repository: Github
 IDE: vscode
 Language: Python
 Libraries:
-
+PyautoGUI
+RoboFlow
 
 
