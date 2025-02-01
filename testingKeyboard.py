@@ -5,7 +5,7 @@ import mouse
 import json
 
 curPreset = 'default'
-presetDict = {'default': {'test' : ['ctrl', '', '', 'true', 'true']}}
+presetDict = {'default': {'test' : ['ctrl', '', '', 'true', 'true'], 'Paper' : ['ctrl', '', '', 'true', 'true']}}
 
 cur_key_map = {}
 
@@ -45,7 +45,7 @@ keyboard.hook(on_key_event)
 
 
 # call
-def handle_action(action: str, x, y):
+def handle_action(action: str, dx, dy):
     elements = presetDict[curPreset][action]
     key1, key2, key3 = elements[0], elements[1], elements[2]
     hold = elements[3]
@@ -58,7 +58,7 @@ def handle_action(action: str, x, y):
 
     #if this action's delta should move the mouse
     if track_movement == 'true':
-        mouse.move(50, 50, absolute=False, duration=0.1)
+        mouse.move(dx, dy, absolute=False, duration=0.1)
         return
 
 def simulate_mouse(btn: int, scroll: int = None):
