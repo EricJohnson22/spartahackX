@@ -1,0 +1,14 @@
+GAMEPLAN
+PROJECT CONCEPT:
+Create a program that can turn Movements (or potentially voice commands) into inputs to enable disabled individuals to have an easier time using a computer.
+Include an interface that enables individuals to bind certain motions to keybinds or macros.
+Use recognition software powered by a tailored AI model in order to ensure better results.
+
+RESOURCES:
+Repository: Github
+IDE: vscode
+Language: Python
+Libraries:
+
+
+
