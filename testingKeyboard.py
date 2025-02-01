@@ -1,1 +1,1 @@
-import keyboard-master/keyboard
+import keyboard
