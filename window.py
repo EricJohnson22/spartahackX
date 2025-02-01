@@ -10,6 +10,26 @@ root.geometry(f"{800}x{600}")
 # Create different sections using nested frames
 # add content to individual frames to maintain structure
 
+#
+# Menu bar
+#
+menubar = tk.Menu(root)
+root.config(menu=menubar)
+
+# Create File menu
+file_menu = tk.Menu(menubar, tearoff=0)
+menubar.add_cascade(label="File", menu=file_menu)
+# Create Edit menu
+edit_menu = tk.Menu(menubar, tearoff=0)
+menubar.add_cascade(label="Edit", menu=edit_menu)
+# Create Help menu
+help_menu = tk.Menu(menubar, tearoff=0)
+menubar.add_cascade(label="Help", menu=help_menu)
+
+# Add Exit command to File menu
+file_menu.add_command(label="Exit", command=root.quit)
+
+#
 # Header section
 header_frame = tk.Frame(root, relief="raised")
 header_frame.pack(fill="x", pady=(0, 10))
