@@ -6,7 +6,7 @@ Use recognition software powered by a tailored AI model in order to ensure bette
 
 RESOURCES:
 Repository: Github
-IDE: vscode
+IDE: Pycharm
 Language: Python
 Libraries:
 PyautoGUI
