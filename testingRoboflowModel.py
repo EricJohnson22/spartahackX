@@ -1,4 +1,7 @@
 from inference.models.utils import get_roboflow_model
+from pywin32_testutil import testmain
+
+import testingKeyboard
 import cv2
 import time
 
@@ -7,7 +10,7 @@ import time
 # Roboflow model
 class GestureRecognizer:
     __slots__ = ['model_name', 'model_version', 'mappings', 'model', 'last_time',
-                 'last_input', 'time_buffer','cap']
+                 'last_input', 'time_buffer','cap','last_x','last_y']
 
 
 
@@ -31,6 +34,8 @@ class GestureRecognizer:
         )
         self.last_time = 0
         self.last_input = ""
+        self.last_x = 0
+        self.last_y = 0
 
         self.cap = cv2.VideoCapture(0)
 
@@ -80,10 +85,14 @@ class GestureRecognizer:
                 # program will not recognize a similar input for a certain amount of real time
                 # or until another input is recognized (FOR CLICK TYPE ONLY)
                 if self.last_input != current_input or time.perf_counter() - self.last_time > self.time_buffer:
-                    print(current_input)
+                    testingKeyboard.handle_action(current_input,self.last_x-x_center,-(self.last_y-y_center))
 
                     self.last_time = time.perf_counter()
                     self.last_input = current_input
+                    self.last_x = x_center
+                    self.last_y = y_center
+            else:
+                print("test")
 
 
 
