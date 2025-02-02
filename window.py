@@ -14,6 +14,8 @@ hold = 0
 track = 0
 repeat = 0
 
+preset.load_user_settings()
+
 
 # create the main window frame
 root = tk.Tk()
@@ -33,10 +35,12 @@ menubar = tk.Menu(root)
 root.config(menu=menubar)
 
 def exit_program():
+    preset.save_user_settings()
     global run
     run = False
     #SAVE SHIT TO JSON FILE
     return
+root.protocol('WM_DELETE_WINDOW', exit_program)
 # Create File menu
 file_menu = tk.Menu(menubar, tearoff=0)
 menubar.add_cascade(label="File", menu=file_menu)
@@ -71,11 +75,16 @@ mainframe.grid(row=1, column=0, pady=10, padx=15)
 
 def create_preset():
     key_dict = {}
-    key_list = [key1_value.get(), key2_value.get(), key3_value.get()]
+    key_list = [key1_value.get(), key2_value.get(), key3_value.get(),bool_helper(hold),bool_helper(track),bool_helper(repeat)]
     key_dict[action_value.get()] = key_list
-    action = preset_name.get()
-    preset.update_preset(action, key_dict)
+    curr_preset = preset_name.get()
+    preset.update_preset(curr_preset, key_dict)
     populate_list() # repopulate list as it changed
+
+def delete_preset():
+    curr_preset = preset_name.get()
+    preset.remove_preset(curr_preset)
+    populate_list()
 
 def bool_helper(val):
     if val:
@@ -230,8 +239,8 @@ def populate_list():
 def get_selected_item():
     position = listbox.curselection()  # Get the indices of selected items
     selected_item = listbox.get(position)  # Get the items
-
-    key_dict = preset.presetDict[selected_item]
+    print(selected_item)
+    preset.switch_preset(selected_item)
     # fetch values form dictionary
 
 # Create a Listbox widget
