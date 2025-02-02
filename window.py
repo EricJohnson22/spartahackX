@@ -10,6 +10,9 @@ a seperate main function, ignore the previous main function -Eric
 buffer = .1
 test = GestureRecognizer(buffer)
 run = True
+hold = 0
+track = 0
+repeat = 0
 
 
 # create the main window frame
@@ -74,9 +77,16 @@ def create_preset():
     preset.update_preset(action, key_dict)
     populate_list() # repopulate list as it changed
 
+def bool_helper(val):
+    if val:
+        return 'true'
+    else:
+        return 'false'
 
 def register_action():
-    preset.bind_action(action_value.get(), [key1_value.get(),key2_value.get(),key3_value.get(),'false','false'])
+    global hold
+    global repeat
+    preset.bind_action(action_value.get(), [key1_value.get(),key2_value.get(),key3_value.get(),bool_helper(hold),bool_helper(track),bool_helper(repeat)])
     if isinstance(key1_value.get(), str):
         print("working")
     print(key1_value.get())
@@ -90,6 +100,43 @@ def register_action():
 tk.Button(mainframe, text="Create Preset", command=lambda: create_preset()).pack(padx=5, pady=10)
 
 tk.Button(mainframe, text="Add Bind", command=lambda: register_action()).pack(padx=5, pady=14)
+
+
+def toggle_hold():
+    global hold
+    if hold:
+        hold = 0
+    else:
+        hold = 1
+
+
+def toggle_track():
+    global track
+    if track:
+        track = 0
+    else:
+        track = 1
+
+
+def toggle_repeat():
+    global repeat
+
+    if repeat:
+        repeat = 0
+    else:
+        repeat = 1
+    print(bool_helper(repeat))
+
+
+var1 = tk.IntVar()
+var2 = tk.IntVar()
+var3 = tk.IntVar()
+c1 = tk.Checkbutton(mainframe, text='Press and Hold',variable=var1, onvalue=1, offvalue=0, command=toggle_hold)
+c2 = tk.Checkbutton(mainframe, text='Track',variable=var2, onvalue=1, offvalue=0, command=toggle_track)
+c3 = tk.Checkbutton(mainframe, text='Repeat',variable=var3, onvalue=1, offvalue=0, command=toggle_repeat)
+c1.pack()
+c2.pack()
+c3.pack()
 
 
 #

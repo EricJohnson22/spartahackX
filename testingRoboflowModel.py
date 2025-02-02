@@ -12,7 +12,7 @@ import time
 # Roboflow model
 class GestureRecognizer:
     __slots__ = ['model_name', 'model_version', 'model', 'last_time',
-                 'last_input', 'time_buffer','cap','last_x','last_y']
+                 'last_input', 'time_buffer','cap','last_x','last_y','last_dx','last_dy']
 
 
 
@@ -38,6 +38,8 @@ class GestureRecognizer:
         self.last_input = ""
         self.last_x = 0
         self.last_y = 0
+        self.last_dx = 0
+        self.last_dy = 0
         self.time_buffer = buffer_input
         self.cap = cv2.VideoCapture(0)
 
@@ -83,6 +85,11 @@ class GestureRecognizer:
 
                     self.last_time = time.perf_counter()
                     self.last_input = current_input
+                    self.last_dx = self.last_x-x_center
+                    self.last_dy = -(self.last_y-y_center)
+                else:
+                    testingKeyboard.handle_action(self.last_input,self.last_dx,self.last_dy)
+
                 self.last_x = x_center
                 self.last_y = y_center
 
