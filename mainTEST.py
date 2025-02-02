@@ -1,7 +1,7 @@
 from testingRoboflowModel import GestureRecognizer
 
-dict ={}
-buffer = .5
-test = GestureRecognizer(dict,buffer)
+
+buffer = .1
+test = GestureRecognizer(buffer)
 while True:
     test.recognizer_run()

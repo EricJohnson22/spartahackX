@@ -1,4 +1,6 @@
 from inference.models.utils import get_roboflow_model
+
+
 from pywin32_testutil import testmain
 
 import testingKeyboard
@@ -9,7 +11,7 @@ import time
 
 # Roboflow model
 class GestureRecognizer:
-    __slots__ = ['model_name', 'model_version', 'mappings', 'model', 'last_time',
+    __slots__ = ['model_name', 'model_version', 'model', 'last_time',
                  'last_input', 'time_buffer','cap','last_x','last_y']
 
 
@@ -18,7 +20,7 @@ class GestureRecognizer:
 
 #WILL NEED TO TAKE IN DICTIONARY OF MAPPINGS
 
-    def __init__(self,mappings_input, buffer_input) -> None:
+    def __init__(self, buffer_input) -> None:
         """
         Initializes the recognizer to be used within main.
         :param: mappings_input Dictionary of mappings from gestures to
@@ -36,28 +38,20 @@ class GestureRecognizer:
         self.last_input = ""
         self.last_x = 0
         self.last_y = 0
-
+        self.time_buffer = buffer_input
         self.cap = cv2.VideoCapture(0)
 
     # Check if the webcam is opened successfully
         if not self.cap.isOpened():
             print("Error: Could not open camera.")
             exit()
-        #self.mappings = mappings_input
-        #self.time_buffer = buffer_input
-        #REMOVE THIS SHIT LATER FUCKING IDIOT
-        self.mappings = {}
-        self.mappings["Rock"] = 1
-        self.mappings["Paper"] = 2
-        self.mappings["Scissors"] = 3
-        self.time_buffer = .5
-        #THIS SHIT
+
+
+
         return
 
-    def recognizer_ui_update(self,new_mappings,new_buffer):
-        #THIS ALSO NEEDS TO BE CHANGED EVENTUALLY
-        #self.mappings = self.new_mappings
-        self.mappings = new_mappings
+    def recognizer_ui_update(self,new_buffer):
+
         self.time_buffer = new_buffer
         return
     def recognizer_run(self) -> None:
@@ -80,6 +74,7 @@ class GestureRecognizer:
                 y_center = int(prediction.y)
                 width = int(prediction.width)
                 height = int(prediction.height)
+
                 current_input = str(prediction.class_name)
 
                 # program will not recognize a similar input for a certain amount of real time
@@ -89,8 +84,8 @@ class GestureRecognizer:
 
                     self.last_time = time.perf_counter()
                     self.last_input = current_input
-                    self.last_x = x_center
-                    self.last_y = y_center
+                self.last_x = x_center
+                self.last_y = y_center
             else:
                 print("test")
 
@@ -100,6 +95,8 @@ class GestureRecognizer:
             # Display the resulting frame
             frame = cv2.flip(frame, 1)
             cv2.imshow('Webcam Feed', frame)
+
+
 
             # Press 'q' to quit the video window
             if cv2.waitKey(1) & 0xFF == ord('q'):
