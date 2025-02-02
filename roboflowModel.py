@@ -8,6 +8,7 @@ pipeline = InferencePipeline.init(
     video_reference=0,
     on_prediction = render_boxes,
     api_key=api_key,
+
 )
 
 pipeline.start()

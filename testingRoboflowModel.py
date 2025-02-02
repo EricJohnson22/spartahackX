@@ -98,6 +98,7 @@ class GestureRecognizer:
 
 
             # Display the resulting frame
+            frame = cv2.flip(frame, 1)
             cv2.imshow('Webcam Feed', frame)
 
             # Press 'q' to quit the video window
