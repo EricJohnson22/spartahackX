@@ -168,7 +168,7 @@ symbols = [
     ';', ':',  # ; key
     "'", '"',  # ' key
     ',', '<', '.', '>', '/', '?',  # , . / keys
-    '`', '~', 'left', 'right' 'middle', 'scroll',''# ` key
+    '`', '~', 'left', 'right' ,'middle', 'scroll',''# ` key
 ]
 
 key1_list = ["Ctrl", "Shift", "Alt", "Super", ""]   # options for one and two

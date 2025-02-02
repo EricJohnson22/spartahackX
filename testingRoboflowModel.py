@@ -12,7 +12,7 @@ import time
 # Roboflow model
 class GestureRecognizer:
     __slots__ = ['model_name', 'model_version', 'model', 'last_time',
-                 'last_input', 'time_buffer','cap','last_x','last_y','last_dx','last_dy']
+                 'last_input', 'time_buffer','cap','last_x','last_y','last_dx','last_dy','last_width','last_height']
 
 
 
@@ -40,6 +40,8 @@ class GestureRecognizer:
         self.last_y = 0
         self.last_dx = 0
         self.last_dy = 0
+        self.last_width = 0
+        self.last_height = 0
         self.time_buffer = buffer_input
         self.cap = cv2.VideoCapture(0)
 
@@ -64,7 +66,7 @@ class GestureRecognizer:
         if ret:
             # Run inference on the frame
             results = self.model.infer(image=frame,
-                              confidence=0.66,
+                              confidence=0.7,
                               iou_threshold=0.5)
 
             # Plot image with face bounding box (using opencv)
@@ -81,14 +83,16 @@ class GestureRecognizer:
                 # program will not recognize a similar input for a certain amount of real time
                 # or until another input is recognized (FOR CLICK TYPE ONLY)
                 if self.last_input != current_input or time.perf_counter() - self.last_time > self.time_buffer:
-                    testingKeyboard.handle_action(current_input,self.last_x-x_center,-(self.last_y-y_center))
+                    testingKeyboard.handle_action(current_input,self.last_x-x_center,-(self.last_y-y_center),self.width,self.height)
 
                     self.last_time = time.perf_counter()
                     self.last_input = current_input
                     self.last_dx = self.last_x-x_center
                     self.last_dy = -(self.last_y-y_center)
+                    self.last_width = width
+                    self.last_height = height
                 else:
-                    testingKeyboard.handle_action(self.last_input,self.last_dx,self.last_dy)
+                    testingKeyboard.handle_action(self.last_input,self.last_dx,self.last_dy,self.width,self.height)
 
                 self.last_x = x_center
                 self.last_y = y_center

@@ -58,7 +58,7 @@ keyboard.hook(on_key_event)
 curAction = ''
 
 
-def handle_action(action: str, dx, dy):
+def handle_action(action: str, dx, dy,width,height):
     global curAction
     if action not in presetDict[curPreset]:
        return
