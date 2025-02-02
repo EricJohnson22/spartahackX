@@ -9,7 +9,6 @@ presetDict = {'default': {'test' : ['ctrl', '', '', 'true', 'true'], 'Paper' : [
 
 cur_key_map = {}
 
-
 def create_preset(name: str, key_map: dict):
     presetDict[name] = key_map
 
@@ -25,6 +24,7 @@ def remove_preset(name: str):
 
 # switch the activated preset
 def switch_preset(name: str):
+    global curPreset
     curPreset = name
 
 
@@ -57,6 +57,7 @@ def handle_action(action: str, dx, dy):
         simulate_hotkey_hold(key1, key2, key3)
     else:
         simulate_hotkey_press(key1, key2, key3)
+
 
     #if this action's delta should move the mouse
     if track_movement == 'true':

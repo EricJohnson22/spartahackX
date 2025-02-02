@@ -1,5 +1,16 @@
 import tkinter as tk
 import testingKeyboard as preset
+from testingRoboflowModel import GestureRecognizer
+
+"""
+IMPORTANT: this is going to function as main from now on, i was too lazy to convert this file into class that could be initialized in
+a seperate main function, ignore the previous main function -Eric
+"""
+
+buffer = .1
+test = GestureRecognizer(buffer)
+run = True
+
 
 # create the main window frame
 root = tk.Tk()
@@ -18,11 +29,16 @@ root.geometry(f"{800}x{600}")
 menubar = tk.Menu(root)
 root.config(menu=menubar)
 
+def exit_program():
+    global run
+    run = False
+    #SAVE SHIT TO JSON FILE
+    return
 # Create File menu
 file_menu = tk.Menu(menubar, tearoff=0)
 menubar.add_cascade(label="File", menu=file_menu)
 # Add Exit command to File menu
-file_menu.add_command(label="Exit", command=root.quit)
+file_menu.add_command(label="Exit", command=exit_program)
 # Create Edit menu
 edit_menu = tk.Menu(menubar, tearoff=0)
 menubar.add_cascade(label="Edit", menu=edit_menu)
@@ -57,9 +73,14 @@ def create_preset():
     action = preset_name.get()
     preset.create_preset(action, key_dict)
     populate_list() # repopulate list as it changed
+def register_action():
+    preset.bind_action(action_value.get(), [key1_value.get(),key2_value.get(),key3_value.get()])
+    #gonna have to handle when certain binds arent available, or maybe not i dont know
 
 # create button
 tk.Button(mainframe, text="Create Preset", command=lambda: create_preset()).pack(padx=5, pady=10)
+
+tk.Button(mainframe, text="Add Bind", command=lambda: register_action()).pack(padx=5, pady=14)
 
 
 #
@@ -85,7 +106,7 @@ symbols = [
     '`', '~',  # ` key
 ]
 
-key1_list = ["Ctrl", "Shift", "Alt", "Super"]   # options for one and two
+key1_list = ["Ctrl", "Shift", "Alt", "Super", ""]   # options for one and two
 key3_list = alphabet + numbers + symbols
 actions_list = ["rock", "paper", "scissors"]    # list of available actions for now
 
@@ -153,6 +174,7 @@ def populate_list():
 def get_selected_item():
     position = listbox.curselection()  # Get the indices of selected items
     selected_item = listbox.get(position)  # Get the items
+
     key_dict = preset.presetDict[selected_item]
     # fetch values form dictionary
 
@@ -167,4 +189,13 @@ confirm_button.pack(pady=10)
 
 
 # start window
-root.mainloop()
+while run:
+    test.recognizer_run()
+    root.update()
+
+test.recognizer_terminate()
+
+
+
+
+

@@ -98,14 +98,12 @@ class GestureRecognizer:
 
 
 
-            # Press 'q' to quit the video window
-            if cv2.waitKey(1) & 0xFF == ord('q'):
-                self.recognizer_terminate()
+
         else:
             print("Error: Could not read frame.")
             self.recognizer_terminate()
 
-# When everything is done, release the capture and destroy all windows
+
     def recognizer_terminate(self):
         self.cap.release()
         cv2.destroyAllWindows()
