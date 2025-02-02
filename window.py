@@ -76,7 +76,13 @@ def create_preset():
 
 
 def register_action():
-    preset.bind_action(action_value.get(), [key1_value.get(),key2_value.get(),key3_value.get()])
+    preset.bind_action(action_value.get(), [key1_value.get(),key2_value.get(),key3_value.get(),'false','false'])
+    if isinstance(key1_value.get(), str):
+        print("working")
+    print(key1_value.get())
+    print(key2_value.get())
+    print(key3_value.get())
+
     #gonna have to handle when certain binds arent available, or maybe not i dont know
 
 
@@ -111,7 +117,7 @@ symbols = [
 
 key1_list = ["Ctrl", "Shift", "Alt", "Super", ""]   # options for one and two
 key3_list = alphabet + numbers + symbols
-actions_list = ["rock", "paper", "scissors"]    # list of available actions for now
+actions_list = ["Rock", "Paper", "Scissors"]    # list of available actions for now
 
 px1 = 10    # x padding for dropdowns
 py1 = 5    # y padding for dropdowns
