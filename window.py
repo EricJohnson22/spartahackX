@@ -71,11 +71,14 @@ def create_preset():
     key_list = [key1_value.get(), key2_value.get(), key3_value.get()]
     key_dict[action_value.get()] = key_list
     action = preset_name.get()
-    preset.create_preset(action, key_dict)
+    preset.update_preset(action, key_dict)
     populate_list() # repopulate list as it changed
+
+
 def register_action():
     preset.bind_action(action_value.get(), [key1_value.get(),key2_value.get(),key3_value.get()])
     #gonna have to handle when certain binds arent available, or maybe not i dont know
+
 
 # create button
 tk.Button(mainframe, text="Create Preset", command=lambda: create_preset()).pack(padx=5, pady=10)

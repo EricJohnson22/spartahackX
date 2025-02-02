@@ -9,9 +9,8 @@ presetDict = {'default': {'test' : ['ctrl', '', '', 'true', 'true'], 'Paper' : [
 
 cur_key_map = {}
 
-def create_preset(name: str, key_map: dict):
+def update_preset(name: str, key_map: dict):
     presetDict[name] = key_map
-
 
 # removes the current preset if it is not the default preset
 # and switches back to default preset
@@ -106,9 +105,10 @@ def simulate_hotkey_press(key1: str = '', key2: str = '', key3: str = ''):
     elif key3 != '':
         hotkey += key3
 
-    if hotkey != '':
+    if hotkey == '':
         return hotkey
-        #keyboard.send(hotkey)
+    keyboard.send(hotkey)
+    print(hotkey)
     return hotkey
 
 def simulate_hotkey_hold(key1: str = '', key2: str = '', key3: str = ''):
@@ -128,9 +128,7 @@ def stop_simulated_hotkey_hold(key1: str = '', key2: str = '', key3: str = ''):
         keyboard.release(key2)
     if key3 != '':
         keyboard.release(key3)
-
     print("stopped holding " + key1)
-
 
 time.sleep(1)
 stop_simulated_hotkey_hold('ctrl', '', '')
