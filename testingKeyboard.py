@@ -12,9 +12,11 @@ def save_user_settings():
     with open("user_presets.json", "w") as json_file:
         json.dump(presetDict, json_file, indent=4)
 
+
 def load_user_settings():
     with open("user_presets.json", "r") as json_file:
         presetDict = json.load(json_file)
+
 
 def update_preset(name: str, key_map: dict):
     presetDict[name] = key_map
@@ -150,6 +152,4 @@ def stop_simulated_hotkey_hold(key1: str = '', key2: str = '', key3: str = ''):
     if key3 != '':
         keyboard.release(key3)
     print("stopped holding " + key1)
-
-time.sleep(1)
 
