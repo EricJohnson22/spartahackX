@@ -85,11 +85,11 @@ class GestureRecognizer:
                 cv2.rectangle(frame, (x0, y0), (x1, y1), (255, 255, 0), 10)
                 #cv2.putText(frame,'Gesture', (x0, y0 - 10), cv2.FONT_HERSHEY_SIMPLEX, 1.5, (255, 255, 255), 2)
                 cv2.putText(frame, str(x0), (x0, y0 - 10), cv2.FONT_HERSHEY_SIMPLEX, 1.5, (255, 255, 255), 2)
-                cv2.putText(frame, str(y0), (x0, y0 - 10), cv2.FONT_HERSHEY_SIMPLEX, 1.5, (255, 255, 255), 2)
+                cv2.putText(frame, str(y0), (x0+ 120, y0 - 10), cv2.FONT_HERSHEY_SIMPLEX, 1.5, (255, 255, 255), 2)
                 # program will not recognize a similar input for a certain amount of real time
                 # or until another input is recognized (FOR CLICK TYPE ONLY)
                 if self.last_input != current_input or time.perf_counter() - self.last_time > self.time_buffer:
-                    testingKeyboard.handle_action(current_input,self.last_x-x_center,-(self.last_y-y_center),width,height)
+                    testingKeyboard.handle_action(current_input,x_center,y_center,width,height)
 
                     self.last_time = time.perf_counter()
                     self.last_input = current_input
@@ -98,7 +98,7 @@ class GestureRecognizer:
                     self.last_width = width
                     self.last_height = height
                 else:
-                    testingKeyboard.handle_action(self.last_input,self.last_dx,self.last_dy,width,height)
+                    testingKeyboard.handle_action(self.last_input,self.last_x,self.last_y,width,height)
 
                 self.last_x = x_center
                 self.last_y = y_center
