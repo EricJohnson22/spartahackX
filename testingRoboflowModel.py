@@ -68,7 +68,6 @@ class GestureRecognizer:
             # Plot image with face bounding box (using opencv)
             if results[0].predictions:
                 prediction = results[0].predictions[0]
-                print(prediction)
 
                 x_center = int(prediction.x)
                 y_center = int(prediction.y)
@@ -86,8 +85,7 @@ class GestureRecognizer:
                     self.last_input = current_input
                 self.last_x = x_center
                 self.last_y = y_center
-            else:
-                print("test")
+
 
 
 
