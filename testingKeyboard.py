@@ -87,7 +87,7 @@ def handle_action(action: str, dx, dy,width,height):
 
     #if this action's delta should move the mouse
     if track_movement == 'true':
-        mouse.move(3*dx, dy*2.5)
+        mouse.move(1920-(dx*3), dy*2.5)
 
     curAction = action
 

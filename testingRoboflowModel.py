@@ -83,6 +83,7 @@ class GestureRecognizer:
                 x1 = x_center + width // 2
                 y1 = y_center + height // 2
                 cv2.rectangle(frame, (x0, y0), (x1, y1), (255, 255, 0), 10)
+
                 #cv2.putText(frame,'Gesture', (x0, y0 - 10), cv2.FONT_HERSHEY_SIMPLEX, 1.5, (255, 255, 255), 2)
                 cv2.putText(frame, str(x0), (x0, y0 - 10), cv2.FONT_HERSHEY_SIMPLEX, 1.5, (255, 255, 255), 2)
                 cv2.putText(frame, str(y0), (x0+ 120, y0 - 10), cv2.FONT_HERSHEY_SIMPLEX, 1.5, (255, 255, 255), 2)
