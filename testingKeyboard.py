@@ -7,7 +7,14 @@ import json
 curPreset = 'default'
 presetDict = {'default': {'test' : ['', '', 'a', 'true', 'false', 'false'], 'Paper' : ['ctrl', '', '', 'true', 'true', 'false']}}
 
-cur_key_map = {}
+
+def save_user_settings():
+    with open("user_presets.json", "w") as json_file:
+        json.dump(presetDict, json_file, indent=4)
+
+def load_user_settings():
+    with open("user_presets.json", "r") as json_file:
+        presetDict = json.load(json_file)
 
 def update_preset(name: str, key_map: dict):
     presetDict[name] = key_map
@@ -129,7 +136,7 @@ def simulate_hotkey_hold(key1: str = '', key2: str = '', key3: str = ''):
 
     print("holding " + key1)
 
-    
+
 def stop_simulated_hotkey_hold(key1: str = '', key2: str = '', key3: str = ''):
     if key1 != '':
         keyboard.release(key1)
@@ -139,21 +146,6 @@ def stop_simulated_hotkey_hold(key1: str = '', key2: str = '', key3: str = ''):
         keyboard.release(key3)
     print("stopped holding " + key1)
 
-handle_action('test', 0, 0)
-handle_action('test', 0,0)
-handle_action('test', 0,0)
 time.sleep(1)
 stop_simulated_hotkey_hold('ctrl', '', '')
 
-
-
-def record_hotkey():
-    return  # hotkeys = []
-    # key1 = ''
-    # while key1 == '':
-    #     key1 = keyboard.read_event()
-    #
-    # hotkeys.append(key1)
-    #
-    # key2 = ''
-    # while keyboard.is_pressed(key1) and key2 == '':
