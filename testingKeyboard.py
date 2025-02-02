@@ -5,7 +5,7 @@ import mouse
 import json
 
 curPreset = 'default'
-presetDict = {'default': {'test' : ['ctrl', '', '', 'true', 'true'], 'Paper' : ['ctrl', '', '', 'true', 'true']}}
+presetDict = {'default': {'test' : ['', '', 'a', 'true', 'false', 'false'], 'Paper' : ['ctrl', '', '', 'true', 'true', 'false']}}
 
 cur_key_map = {}
 
@@ -42,26 +42,34 @@ def on_key_event(e):
 # Hook the key event
 keyboard.hook(on_key_event)
 
+curAction = ''
 
-# call
+
 def handle_action(action: str, dx, dy):
+    global curAction
     if action not in presetDict[curPreset]:
        return
     elements = presetDict[curPreset][action]
     key1, key2, key3 = elements[0], elements[1], elements[2]
     hold = elements[3]
     track_movement = elements[4]
+    repeat = elements[5]
 
-    if hold == 'true':
-        simulate_hotkey_hold(key1, key2, key3)
-    else:
-        simulate_hotkey_press(key1, key2, key3)
+    if repeat == 'true' or curAction != action:
+        if hold == 'true':
+            simulate_hotkey_hold(key1, key2, key3)
+        else:
+            simulate_hotkey_press(key1, key2, key3)
+
+
+
 
 
     #if this action's delta should move the mouse
     if track_movement == 'true':
         mouse.move(dx, dy, absolute=False, duration=0.1)
-        return
+
+    curAction = action
 
 def simulate_mouse(btn: int, scroll: int = None):
     if btn == 0:
@@ -121,6 +129,7 @@ def simulate_hotkey_hold(key1: str = '', key2: str = '', key3: str = ''):
 
     print("holding " + key1)
 
+    
 def stop_simulated_hotkey_hold(key1: str = '', key2: str = '', key3: str = ''):
     if key1 != '':
         keyboard.release(key1)
@@ -130,6 +139,9 @@ def stop_simulated_hotkey_hold(key1: str = '', key2: str = '', key3: str = ''):
         keyboard.release(key3)
     print("stopped holding " + key1)
 
+handle_action('test', 0, 0)
+handle_action('test', 0,0)
+handle_action('test', 0,0)
 time.sleep(1)
 stop_simulated_hotkey_hold('ctrl', '', '')
 
