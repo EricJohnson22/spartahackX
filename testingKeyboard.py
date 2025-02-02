@@ -62,6 +62,11 @@ def handle_action(action: str, dx, dy):
     track_movement = elements[4]
     repeat = elements[5]
 
+    if curAction != action:
+        stop_elems = presetDict[curPreset][curAction]
+        s_key1, s_key2, s_key3 = stop_elems[0], stop_elems[1], stop_elems[2]
+        stop_simulated_hotkey_hold(s_key1, s_key2, s_key3)
+
     if repeat == 'true' or curAction != action:
         if hold == 'true':
             simulate_hotkey_hold(key1, key2, key3)
@@ -147,5 +152,4 @@ def stop_simulated_hotkey_hold(key1: str = '', key2: str = '', key3: str = ''):
     print("stopped holding " + key1)
 
 time.sleep(1)
-stop_simulated_hotkey_hold('ctrl', '', '')
 
