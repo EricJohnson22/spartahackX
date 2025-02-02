@@ -59,14 +59,13 @@ class GestureRecognizer:
         self.time_buffer = new_buffer
         return
     def recognizer_run(self) -> None:
-        # Capture frame-by-frame
+
         ret, frame = self.cap.read()
 
-        # If the frame was read successfully, display it
         if ret:
             # Run inference on the frame
             results = self.model.infer(image=frame,
-                              confidence=0.7,
+                              confidence=0.50,
                               iou_threshold=0.5)
 
             # Plot image with face bounding box (using opencv)
@@ -79,11 +78,18 @@ class GestureRecognizer:
                 height = int(prediction.height)
 
                 current_input = str(prediction.class_name)
-
+                x0 = x_center - width // 2
+                y0 = y_center - height // 2
+                x1 = x_center + width // 2
+                y1 = y_center + height // 2
+                cv2.rectangle(frame, (x0, y0), (x1, y1), (255, 255, 0), 10)
+                #cv2.putText(frame,'Gesture', (x0, y0 - 10), cv2.FONT_HERSHEY_SIMPLEX, 1.5, (255, 255, 255), 2)
+                cv2.putText(frame, str(x0), (x0, y0 - 10), cv2.FONT_HERSHEY_SIMPLEX, 1.5, (255, 255, 255), 2)
+                cv2.putText(frame, str(y0), (x0, y0 - 10), cv2.FONT_HERSHEY_SIMPLEX, 1.5, (255, 255, 255), 2)
                 # program will not recognize a similar input for a certain amount of real time
                 # or until another input is recognized (FOR CLICK TYPE ONLY)
                 if self.last_input != current_input or time.perf_counter() - self.last_time > self.time_buffer:
-                    testingKeyboard.handle_action(current_input,self.last_x-x_center,-(self.last_y-y_center),self.width,self.height)
+                    testingKeyboard.handle_action(current_input,self.last_x-x_center,-(self.last_y-y_center),width,height)
 
                     self.last_time = time.perf_counter()
                     self.last_input = current_input
@@ -92,7 +98,7 @@ class GestureRecognizer:
                     self.last_width = width
                     self.last_height = height
                 else:
-                    testingKeyboard.handle_action(self.last_input,self.last_dx,self.last_dy,self.width,self.height)
+                    testingKeyboard.handle_action(self.last_input,self.last_dx,self.last_dy,width,height)
 
                 self.last_x = x_center
                 self.last_y = y_center
@@ -103,8 +109,9 @@ class GestureRecognizer:
 
             # Display the resulting frame
             frame = cv2.flip(frame, 1)
-            cv2.imshow('Webcam Feed', frame)
 
+
+            cv2.imshow('Webcam Feed', frame)
 
 
 

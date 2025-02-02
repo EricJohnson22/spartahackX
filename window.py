@@ -14,7 +14,7 @@ hold = 0
 track = 0
 repeat = 0
 
-preset.load_user_settings()
+
 
 
 # create the main window frame
@@ -38,7 +38,6 @@ def exit_program():
     preset.save_user_settings()
     global run
     run = False
-    #SAVE SHIT TO JSON FILE
     return
 root.protocol('WM_DELETE_WINDOW', exit_program)
 # Create File menu
@@ -246,6 +245,7 @@ def get_selected_item():
 # Create a Listbox widget
 listbox = tk.Listbox(side_frame)
 listbox.pack(fill="both", expand=True)
+preset.load_user_settings()
 populate_list()     # populate list at start
 
 # Add a button to confirm the selection
