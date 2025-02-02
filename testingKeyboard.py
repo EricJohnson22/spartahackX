@@ -69,9 +69,11 @@ def handle_action(action: str, dx, dy):
     repeat = elements[5]
 
     if curAction != action:
-        stop_elems = presetDict[curPreset][curAction]
-        s_key1, s_key2, s_key3 = stop_elems[0], stop_elems[1], stop_elems[2]
-        stop_simulated_hotkey_hold(s_key1, s_key2, s_key3)
+        if curAction in presetDict[curPreset]:
+            stop_elems = presetDict[curPreset][curAction]
+            s_key1, s_key2, s_key3 = stop_elems[0], stop_elems[1], stop_elems[2]
+            stop_simulated_hotkey_hold(s_key1, s_key2, s_key3)
+
 
     if repeat == 'true' or curAction != action:
         if hold == 'true':
